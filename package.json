@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@n1ru4l/react-in-center-of-screen": "1.0.0-alpha.4",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-seoul/masonry-list": "^1.4.2",
     "@react-navigation/bottom-tabs": "^7.2.0",
@@ -21,7 +22,10 @@
     "react-native-paper": "^5.13.1",
     "react-native-reanimated": "^3.16.7",
     "react-native-safe-area-context": "^5.1.0",
-    "react-native-screens": "^4.5.0"
+    "react-native-screens": "^4.5.0",
+    "react-native-swiper-flatlist": "^3.2.5",
+    "react-native-vector-icons": "^10.2.0",
+    "react-native-video": "^6.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

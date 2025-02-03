@@ -31,7 +31,7 @@ export default function Reels() {
     }
     return (
         <SafeAreaView style={[styles.container, { width: width, height: height }]}>
-            <StatusBar backgroundColor="transparent" barStyle={'dark-content'} translucent={true} />
+            <StatusBar backgroundColor="black" barStyle={'light-content'} translucent={true} />
             <OffsetYProvider
                 columnsPerRow={1}
                 listItemHeight={height}
@@ -89,7 +89,9 @@ export default function Reels() {
                                             }
                                         </InCenterConsumer>
                                         <View style={{ position: 'absolute', padding: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '95%' }}>
-                                            <Ionicons name='chevron-back-outline' size={36} color={'white'} />
+                                            <TouchableOpacity>
+                                                <Ionicons name='chevron-back-outline' size={36} color={'white'} />
+                                            </TouchableOpacity>
                                             <Text style={{ color: 'white' }}>1.5K Views</Text>
                                         </View>
                                         <View style={{ position: 'absolute', right: 15, top: '25%', gap: 30 }}>

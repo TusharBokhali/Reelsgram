@@ -9,7 +9,7 @@ import OptionBar from './OptionBar';
 
 const width = Dimensions.get('window').width;
 
-export default function userProfile() {
+export default function UserProfile() {
     const isDark = useColorScheme() === 'dark';
     const { navigate, goBack } = useNavigation<any>();
     return (

@@ -7,8 +7,13 @@ import SingIn from './Screens/SingIn';
 import Verifications from './Screens/Verifications';
 import Reels from './Screens/Reels';
 import Massege from './Screens/Massege';
-import userProfile from './Screens/userProfile';
+import userProfile from './Screens/UserProfile';
 import OptionBar from './Screens/OptionBar';
+import UserProfile from './Screens/UserProfile';
+import Bottom from './Screens/Bottom';
+import Chat from './Screens/Chat';
+import UserMedia from './Screens/UserMedia';
+import MeProfile from './Screens/MeProfile';
 export default function App() {
   const Stack = createNativeStackNavigator();
   const isDark = useColorScheme() === 'dark';
@@ -18,14 +23,18 @@ export default function App() {
       barStyle={isDark ? 'light-content' : 'dark-content'}
       backgroundColor="transparent"
       />
-      <Stack.Navigator initialRouteName='userProfile' screenOptions={{headerShown:false}}>
+      <Stack.Navigator initialRouteName='MeProfile' screenOptions={{headerShown:false}}>
         <Stack.Screen name='LogIn' component={LogIn} />
         <Stack.Screen name='SingIn' component={SingIn} />
         <Stack.Screen name='Verifications' component={Verifications} />
         <Stack.Screen name='Reels' component={Reels} />
         <Stack.Screen name='Massege' component={Massege} />
-        <Stack.Screen name='userProfile' component={userProfile} />
+        <Stack.Screen name='userProfile' component={UserProfile} />
         <Stack.Screen name='OptionBar' component={OptionBar} />
+        <Stack.Screen name='Chat' component={Chat} />
+        <Stack.Screen name='Bottom' component={Bottom} />
+        <Stack.Screen name='UserMedia' component={UserMedia} />
+        <Stack.Screen name='MeProfile' component={MeProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   )

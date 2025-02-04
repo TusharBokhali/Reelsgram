@@ -1,14 +1,15 @@
-import { View, Text, useColorScheme, StyleSheet, TouchableOpacity, TextInput, Dimensions, Image, ScrollView, StatusBar } from 'react-native'
-import React from 'react'
+import { View, Text, useColorScheme, StyleSheet, TouchableOpacity, TextInput, Dimensions, Image, ScrollView, StatusBar, Pressable } from 'react-native'
+import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaFrame } from 'react-native-safe-area-context';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Feather from 'react-native-vector-icons/Feather';
+import { user } from '../UserChat';
 
 const width = Dimensions.get('window').width;
 export default function Massege() {
     const isDark = useColorScheme() === 'dark';
-
+    const [search,setSearch] = useState('')
     const { navigate } = useNavigation<any>();
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: isDark ? 'black' : 'white' }]}>
@@ -31,6 +32,8 @@ export default function Massege() {
                 <View style={styles.Search}>
                     <TextInput
                         placeholder='Search'
+                        onChangeText={setSearch}
+                        value={search}
                         placeholderTextColor={isDark ? '#d4d4d4' : 'gray'}
                         style={{ width: '90%', fontWeight: '600', letterSpacing: 0.6 }}
                     />
@@ -39,12 +42,14 @@ export default function Massege() {
                     </View>
                 </View>
                 {
-                    [...Array(10)].map((el, inx) => {
+                    user.filter((el,inx)=>{
+                        return el.userName.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+                    }).map((el, inx) => {
                         return (
-                            <View style={styles.MassegeUser} key={inx}>
+                            <Pressable style={styles.MassegeUser} key={inx} onPress={()=>navigate('Chat',{data:el})}>
                                 <View style={{ width: '20%' }}>
                                     <Image
-                                        source={require('../assets/Images/users.png')}
+                                        source={el.user_avatar}
                                         style={{
                                             width: 70,
                                             height: 70,
@@ -54,14 +59,14 @@ export default function Massege() {
                                 </View>
                                 <View style={{ width: '80%', }}>
                                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '90%' }}>
-                                        <Text style={[styles.userName,{color:isDark ? 'white' : 'black'}]}>RamuKaka</Text>
+                                        <Text style={[styles.userName,{color:isDark ? 'white' : 'black'}]}>{el.userName}</Text>
                                         <Text style={[styles.userTime,{color:isDark ? 'white' : 'black'}]}>11:46Am</Text>
                                     </View>
                                     <View style={{ width: '85%' }}>
-                                        <Text style={[styles.userDescription,{color:isDark ? 'white' : 'black'}]}>Lorem ipsum dolor sit amet consect Libero consectetur turpis volutpat cz...</Text>
+                                        <Text style={[styles.userDescription,{color:isDark ? 'white' : 'black'}]}>{el.description}</Text>
                                     </View>
                                 </View>
-                            </View>
+                            </Pressable>
                         )
                     })
                 }

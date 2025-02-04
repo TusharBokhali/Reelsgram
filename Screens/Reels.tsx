@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, useColorScheme, StatusBar, FlatList, Dimensions, TouchableOpacity, Image, LogBox } from 'react-native'
+import { View, Text, StyleSheet, useColorScheme, StatusBar, FlatList, Dimensions, TouchableOpacity, Image, LogBox, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
@@ -11,12 +11,15 @@ import {
 } from "@n1ru4l/react-in-center-of-screen";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Octicons from 'react-native-vector-icons/Octicons';
+import { user } from '../UserChat';
+import { useNavigation } from '@react-navigation/native';
 export default function Reels() {
     const isDark = useColorScheme() === 'dark';
     const [current, setCurrent] = useState(0)
     const width = Dimensions.get('window').width;
     const height = Dimensions.get('window').height;
     const [like, setlike] = useState(false)
+    const {navigate} = useNavigation<any>();
     const changeIndex = ({ index }: any) => {
         setCurrent(index)
     }
@@ -41,7 +44,7 @@ export default function Reels() {
                 {({ setOffsetY }: any) => (
                     <SwiperFlatList
                         vertical={true}
-                        data={data}
+                        data={user}
                         onScroll={ev => {
                             setOffsetY(ev.nativeEvent.contentOffset.y);
                         }}
@@ -135,10 +138,10 @@ export default function Reels() {
                                                 <Text style={{ color: 'white', fontWeight: '600', fontSize: 12 }}>More</Text>
                                             </TouchableOpacity>
                                         </View>
-                                        <View style={{ position: 'absolute', bottom: '5%', padding: 15,width:width * 0.8,left:'5%'}}>
+                                        <Pressable style={{ position: 'absolute', bottom: '5%', padding: 15,width:width * 0.8,left:'5%'}}onPress={()=>navigate('UserMedia',{User:item})} >
                                             <View style={{flexDirection:'row',alignItems:'center',gap:10,marginBottom:10}}>
                                                 <Image
-                                                    source={require('../assets/Images/users.png')}
+                                                    source={item.user_avatar}
                                                     style={{ width: 45, height: 45, borderRadius: 70 }}
                                                 />
                                                 <Text style={{color:'white',fontWeight:'600',fontSize:18}}>Arrayn Patel </Text>
@@ -153,7 +156,7 @@ export default function Reels() {
                                                 fontWeight:'500',
                                                 lineHeight:15.8
                                             }}>Lorem ipsum dolor sit amet consectetur. Lectus cursus blandit integer tellus pellentesque consequat tincidunt...</Text>
-                                        </View>
+                                        </Pressable>
                                     </View>
                                 )}
                             </IndexProvider>

@@ -8,8 +8,6 @@ import { data } from '../data';
 
 export default function MaterialTab({data}:any) {
     const isDark = useColorScheme() === 'dark';
-
-    console.log(data);
     
 
     const Tab = createMaterialTopTabNavigator();
@@ -22,13 +20,14 @@ export default function MaterialTab({data}:any) {
             backgroundColor:isDark ? 'white' : 'black'
         },
         tabBarStyle:{
-            backgroundColor:'black',
+            backgroundColor:isDark ? 'black' : 'white',
         }
-    }}>
+    }}
+    >
       {
         data.map((el:any,inx:any)=>{
             return ( 
-                <Tab.Screen name={el.name} component={el.compinent}
+                <Tab.Screen key={inx} name={el.name} component={el.compinent}
                 options={{
                     title:`${125} ${el.name }`
                 }}

@@ -42,6 +42,7 @@ export default function Chat() {
             GiftedChat.append(previousMessages, messages),
         )
     }, [])
+console.log(userData);
 
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: isDark ? 'black' : 'white', height: height }]}>
@@ -61,7 +62,7 @@ export default function Chat() {
                     gap: 10
                 }}>
                     <Image
-                        source={userData.user_avatar}
+                        source={userData?.user_avatar}
                         style={{
                             width: 50,
                             height: 50,
@@ -101,11 +102,11 @@ export default function Chat() {
                                 return (
                                     userData.id == 1 ? (
                                         <View style={[styles.userDegin,{}]} key={inx}>
-                                            <Text style={[styles.userchatMassage, { color: isDark ? 'white' : 'black' }]}>{el.text}</Text>
+                                            <Text style={[styles.userchatMassage, { color: 'white' }]}>{el.text}</Text>
                                         </View>
                                     ) : (
                                         <View style={styles.userDegin} key={inx}>
-                                            <Text style={[styles.userchatMassage, { color: isDark ? 'white' : 'black' }]}>{el.text}</Text>
+                                            <Text style={[styles.userchatMassage, { color: 'white' }]}>{el.text}</Text>
                                         </View>
                                     )
 

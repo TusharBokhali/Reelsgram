@@ -138,7 +138,7 @@ export default function Reels() {
                                                 <Text style={{ color: 'white', fontWeight: '600', fontSize: 12 }}>More</Text>
                                             </TouchableOpacity>
                                         </View>
-                                        <Pressable style={{ position: 'absolute', bottom: '5%', padding: 15,width:width * 0.8,left:'5%'}}onPress={()=>navigate('UserMedia',{User:item})} >
+                                        <Pressable style={{ position: 'absolute', bottom: '5%', padding: 15,width:width * 0.8,left:'5%'}}onPress={()=>navigate('UserProfile',{User:item})} >
                                             <View style={{flexDirection:'row',alignItems:'center',gap:10,marginBottom:10}}>
                                                 <Image
                                                     source={item.user_avatar}

@@ -1,17 +1,42 @@
-import { View, Text, useColorScheme, StyleSheet, Dimensions, TouchableOpacity, Image, StatusBar } from 'react-native'
+import { View, Text, useColorScheme, StyleSheet, Dimensions, TouchableOpacity, Image, StatusBar, Pressable } from 'react-native'
 import React from 'react'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Feather from 'react-native-vector-icons/Feather';
 import Octicons from 'react-native-vector-icons/Octicons';
 import OptionBar from './OptionBar';
+import Mutal from './Mutal';
+import Following from './Following';
+import Followers from './Followers';
+import { user } from '../UserChat';
 
 const width = Dimensions.get('window').width;
 
 export default function UserProfile() {
+        const propData = [
+            {
+            name:'Mutal',
+            data:'125',
+            compinent: Mutal
+        },
+    
+        {
+            name:'Flollowing',
+            data:'225',
+            compinent: Following
+        },
+    
+        {
+            name:'Followers',
+            data:'255M',
+            compinent: Followers
+        },
+    ]
     const isDark = useColorScheme() === 'dark';
     const { navigate, goBack } = useNavigation<any>();
+    const Route = useRoute<any>();
+    const userIn = Route?.params?.User;
     return (
         <SafeAreaView style={[styles.container,{backgroundColor:isDark ? 'black' : 'white'}]}>
             <StatusBar backgroundColor={isDark ? 'black' : 'white'}/>
@@ -25,7 +50,7 @@ export default function UserProfile() {
                     fontSize: 24,
                     fontWeight: '600',
                     color: isDark ? 'white' : 'black',
-                }}>ramukaka777</Text>
+                }}>{userIn.userName}</Text>
                 <View style={{
                     flexDirection: 'row',
                     gap: 10,
@@ -46,26 +71,26 @@ export default function UserProfile() {
                     width: '30%',
                 }}>
                     <Image
-                        source={require('../assets/Images/users.png')}
+                        source={userIn.user_avatar}
                         style={{ width: 100, height: 100, borderRadius: 100 }}
                     />
-                    <Text style={[styles.userNames,{color:isDark?'white':'black'}]}>Ramukaka</Text>
+                    <Text style={[styles.userNames,{color:isDark?'white':'black'}]}>{userIn.userName}</Text>
                 </View>
                 <View style={{ width: '70%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <View style={styles.Flex}>
+                    <Pressable style={styles.Flex} >
                         <Text style={[styles.Digit,{color:isDark ? 'white' : 'black'}]}>18</Text>
                         <Text style={[styles.Label,{color:isDark ? 'white' : 'black'}]}>Posts</Text>
-                    </View>
+                    </Pressable>
 
-                    <View style={styles.Flex}>
+                    <Pressable style={styles.Flex} onPress={()=>navigate('Followers',)}>
                         <Text style={[styles.Digit,{color:isDark ? 'white' : 'black'}]}>155B</Text>
                         <Text style={[styles.Label,{color:isDark ? 'white' : 'black'}]}>Followers</Text>
-                    </View>
+                    </Pressable>
 
-                    <View style={styles.Flex}>
+                    <Pressable style={styles.Flex}  onPress={()=>navigate('MaterialTab',{data:propData})}>
                         <Text style={[styles.Digit,{color:isDark ? 'white' : 'black'}]}>350</Text>
                         <Text style={[styles.Label,{color:isDark ? 'white' : 'black'}]}>Following</Text>
-                    </View>
+                    </Pressable>
                 </View>
             </View>
             <Text style={[styles.Description, { color: isDark ? 'white' : 'black',}]}>Lorem ipsum dolor sit amet consectetur. Mauris aliquet ipsum eget neque. Senectus iaculis.</Text>
@@ -74,9 +99,9 @@ export default function UserProfile() {
                    <Text style={{fontWeight:'500',fontSize:16,color:isDark ? 'white' : 'black'}}>Edit profile</Text>         
                 </View>
 
-                <View style={[styles.Box,{backgroundColor:isDark ? '#535252' : '#cacaca'}]}>
-                    <Text style={{fontWeight:'500',fontSize:16,color:isDark ? 'white' : 'black'}}>Share profile</Text>
-                </View>
+                <Pressable style={[styles.Box,{backgroundColor:isDark ? '#535252' : '#cacaca'}]} onPress={()=>navigate('Chat',{data:userIn})}>
+                    <Text style={{fontWeight:'500',fontSize:16,color:isDark ? 'white' : 'black'}}>Massege</Text>
+                </Pressable>
             </View>
             <OptionBar />
         </SafeAreaView>

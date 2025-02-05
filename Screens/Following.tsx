@@ -1,4 +1,4 @@
-import { View, Text, useColorScheme, Dimensions, StyleSheet, TextInput, Image, Pressable, ScrollView } from 'react-native'
+import { View, Text, useColorScheme, Dimensions, StyleSheet, TextInput, Image, Pressable, ScrollView, StatusBar } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,6 +12,7 @@ export default function Following() {
     return (
         <ScrollView style={[styles.container, { backgroundColor: isDark ? 'black' : 'white' }]}>
             {/* <ScrollView style={{}}> */}
+            <StatusBar backgroundColor={isDark?'black' : 'white'} barStyle={isDark ? 'light-content' : 'dark-content'}/>
             <View style={styles.Search}>
                 <TextInput
                     placeholder='Search'
@@ -43,7 +44,7 @@ export default function Following() {
                                 <Text style={[styles.name, { color: isDark ? 'white' : 'black' }]}>Ramukaka</Text>
                             </View>
                         </View>
-                            <View style={[styles.Following,{backgroundColor:isDark ? 'gray' : 'black'}]}>
+                            <View style={[styles.Following,{backgroundColor:isDark ? 'gray' : '#cecbcb'}]}>
                                 <Text style={{color:isDark ? 'white' : 'black',fontWeight:'500',fontSize:15}}>Following</Text>
                             </View>
                     </Pressable>

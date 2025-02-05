@@ -1,4 +1,4 @@
-import { View, Text, useColorScheme, Dimensions, StyleSheet, TextInput, Image, Pressable, ScrollView } from 'react-native'
+import { View, Text, useColorScheme, Dimensions, StyleSheet, TextInput, Image, Pressable, ScrollView, StatusBar } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -10,15 +10,17 @@ export default function Followers() {
     const { goBack } = useNavigation();
     const [search, setSearch] = useState('');
     return (
-        <ScrollView style={[styles.container, { backgroundColor: isDark ? 'black' : 'white' }]}>
+        <SafeAreaView style={[styles.container,{ backgroundColor: isDark ? 'black' : 'white' }]}>
+        <ScrollView showsVerticalScrollIndicator={false}>
             {/* <ScrollView style={{}}> */}
+            <StatusBar backgroundColor={isDark ? 'black' : 'white'}/>
             <View style={styles.Search}>
                 <TextInput
                     placeholder='Search'
                     onChangeText={setSearch}
                     value={search}
-                    placeholderTextColor={isDark ? '#d4d4d4' : 'gray'}
-                    style={{ width: '90%', fontWeight: '600', letterSpacing: 0.6 }}
+                    placeholderTextColor    ={isDark ? '#d4d4d4' : 'gray'}
+                    style={{ width: '90%', fontWeight: '600', letterSpacing: 0.6}}
                 />
                 <View>
                     <Feather name='search' size={22} color={isDark ? 'white' : 'black'} />
@@ -43,7 +45,7 @@ export default function Followers() {
                                 <Text style={[styles.name, { color: isDark ? 'white' : 'black' }]}>Ramukaka</Text>
                             </View>
                         </View>
-                            <View style={[styles.Following,{backgroundColor:isDark ? 'gray' : 'black'}]}>
+                            <View style={[styles.Following,{backgroundColor:isDark ? 'gray' : '#cecbcb'}]}>
                                 <Text style={{color:isDark ? 'white' : 'black',fontWeight:'500',fontSize:15}}>Following</Text>
                             </View>
                     </Pressable>
@@ -53,6 +55,7 @@ export default function Followers() {
             </View>
             {/* </ScrollView> */}
         </ScrollView>
+        </SafeAreaView>
     )
 }
 
@@ -72,7 +75,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#D9D9D940',
         position: 'absolute',
         top: 10,
-        // left: '5%'
+        
     },
     FlexMain:{
         marginTop:60,
@@ -91,7 +94,8 @@ const styles = StyleSheet.create({
     },
     name: {
         fontWeight: '500',
-        opacity: 0.5
+        opacity: 0.5,
+
     },
     Following:{
         width:90,
